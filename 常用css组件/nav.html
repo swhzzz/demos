@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>nav</title>
+</head>
+<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	a {
+		text-decoration: none;
+		color: black;
+	}
+	.clearfix:after{
+		content:'';
+		display: block;
+		clear:both;
+	}
+	.wrap {
+		margin: 8px auto;
+		width: 602px;
+		background-color: #F1F1F1;
+		border-radius: 3px;
+		box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+	}
+	.nav>li {
+		float: left;
+		padding: 8px 16px;
+	}
+	.nav>li:hover {
+		background-color: #CCC;
+	}
+	.nav>li>ul {
+		display: none;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 160px;
+		box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+	}
+	.nav li:last-child{
+		position: relative;
+	}
+	.nav>li:hover>ul {
+		display: block;
+	}
+	.nav>li:hover>ul>li {
+		background-color: white;
+		padding: 8px 16px;
+	}
+	.nav>li:hover>ul>li:hover {
+		background-color: #ccc;
+	}
+</style>
+<body>
+	<div class="wrap clearfix">
+		<ul class="nav">
+			<li><a href="#">首页</a></li>
+			<li><a href="#">作品</a></li>
+			<li><a href="#">更多</a>
+				<ul>
+					<li><a href="#">GitHub</a></li>
+					<li><a href="#">博客</a></li>
+					<li><a href="#">知乎</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

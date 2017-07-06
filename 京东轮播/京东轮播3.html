@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>京东首页轮播3</title>
+	<script src='https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js'></script>
+	<style>
+		ul,li {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		a {
+			text-decoration: none;
+		}
+		.clearfix:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		.carousel {
+			position: relative;
+		}
+		.carousel-wrap {
+			width: 790px;
+			margin: 0 auto;
+		}
+		.carousel {
+			overflow: hidden;
+		}
+		.img-ct {
+			position: relative;
+			width: 790px;
+			height: 340px;
+		}
+		.img-ct>li {
+			position: absolute;
+			display: none;
+		}
+		.img-ct>li:first-of-type {
+			display: block;
+		}
+		.btn {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			background-color: rgba(0,0,0,0.15);
+			font-size: 30px;
+			display: none;
+			width: 30px;
+			height: 60px;
+			line-height: 60px;
+			text-align: center;
+		}
+		.btn-pre {
+			color: #fff;
+			left: 0;
+		}
+		.btn-next {
+			color: #fff;
+			right: 0;
+		}
+		.bullet-ct {
+			position: absolute;
+			bottom: 20px;
+			left: 50%;
+			transform: translateX(-50%);
+			height: 25px;
+			border-radius: 10px;
+			background-color: rgba(255,255,255,0.35);
+		}
+		.bullet>li {
+			opacity: 1;
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			vertical-align: middle;
+			border-radius: 50%;
+			background-color: #fff;
+			margin-right: 8px;
+		}
+		.bullet:before {
+			content: '';
+			display: inline-block;
+			width: 0;
+			height: 100%;
+			vertical-align: middle;
+		}
+		.bullet>li:first-of-type {
+			margin-left: 8px;
+		}
+		.bullet>li.active {
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="carousel-wrap">
+		<div class="carousel clearfix">
+			<ul class='img-ct'>
+				<li><a href=""><img src="https://img11.360buyimg.com/da/jfs/t5794/218/106432090/147769/1128c43e/591d54feN5652e85d.jpg" alt=""></a></li>
+				<li><a href=""><img src="https://img1.360buyimg.com/da/jfs/t5272/258/2518512635/69261/ee25f78e/591aea6dN372bc9af.jpg" alt=""></a></li>
+				<li><a href=""><img src="https://img1.360buyimg.com/da/jfs/t5371/91/2306609760/70464/711cfcc7/591963e3Nbacac2fc.jpg" alt=""></a></li>
+				<li><a href=""><img src="https://img13.360buyimg.com/da/jfs/t5557/243/2713080306/117309/2f3dc94f/591d17e8N82294530.jpg" alt=""></a></li>
+				<li><a href=""><img src="https://img1.360buyimg.com/da/jfs/t5710/218/251106261/165315/219ceb7/591e47b6N4cb3ef74.jpg" alt=""></a></li>
+				<li><a href=""><img src="https://img14.360buyimg.com/da/jfs/t5653/275/340774501/150594/c30db046/591ec89dN859ad3af.jpg" alt=""></a></li>
+				<li><a href=""><img src="https://img10.360buyimg.com/da/jfs/t5725/321/332553971/88907/aaaeead0/591ec5d4N2db81706.jpg" alt=""></a></li>
+				<li><a href=""><img src="https://img13.360buyimg.com/da/jfs/t5572/330/365714970/78665/1081bd41/591eda41N9e0dd821.jpg" alt=""></a></li>
+			</ul>
+			<a class='btn btn-pre' href="">&lt;</a>
+			<a class='btn btn-next' href="">&gt;</a>
+			<div class="bullet-ct">
+				<ul class='bullet clearfix'>
+					<li class='active'></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script>
+		var $carouselWrap=$('.carousel-wrap'),
+			$imgCt=$('.img-ct'),
+			$btn=$('.btn'),
+			$btnPre=$('.btn-pre'),
+			$btnNext=$('.btn-next'),
+			$bullet=$('.bullet'),
+			$imgList=$imgCt.children();
+
+
+		var iTime=null;
+			targetImgIndex=1,
+			curImgIndex=0,
+			isAnimationDone=true,
+			timer=null;
+
+		var imgLength=$imgList.length;
+			lastimg=$imgList.last(),
+			firstimg=$imgList.first();
+
+		// $imgCt.append(firstimg.clone());
+		// $imgCt.prepend(lastimg.clone());
+
+
+		$carouselWrap.on('mouseenter',function(){
+			$btn.show();
+		})
+
+		$carouselWrap.on('mouseleave',function(){
+			$btn.hide();
+		})
+
+		$btnPre.on('mouseenter',function(){
+			$(this).css('background-color','rgba(0,0,0,0.6)');
+		})
+
+		$btnPre.on('mouseleave',function(){
+			$(this).css('background-color','rgba(0,0,0,0.15)');
+		})
+
+		$btnNext.on('mouseenter',function(){
+			$(this).css('background-color','rgba(0,0,0,0.6)');
+		})
+
+		$btnNext.on('mouseleave',function(){
+			$(this).css('background-color','rgba(0,0,0,0.15)');
+		})
+		$btnPre.on('click',function(e){
+			e.preventDefault();
+			playPre();
+			autoPlay();
+		})
+
+		$btnNext.on('click',function(e){
+			e.preventDefault();
+			playNext();
+			autoPlay();
+		})
+
+		$bullet.on('mouseover','li',function(){
+			targetImgIndex=$(this).index();
+			clearTimeout(iTime);//防止用户多次滑动
+			iTime=setTimeout(play,100)//只执行最后一次滑动
+			autoPlay();
+		})
+
+		autoPlay();
+
+		function play(){
+			$imgList.eq(curImgIndex).fadeOut(500);//把当前下标的图片淡出
+			$imgList.eq(targetImgIndex).fadeIn(500,function(){//把期望下标的图片淡入
+			});
+			curImgIndex=targetImgIndex;//淡入淡出后，当前下标就是期望下标
+			setBullet();
+		}
+
+		function playNext(){
+			if(curImgIndex==imgLength-1){//如果当前下标是最后一张图片，将期望下标改为0
+				targetImgIndex=0;
+				play()
+				return;
+			}
+			targetImgIndex=curImgIndex+1;//期望下标为当前下标的下一个
+			play()
+		}
+		
+		function playPre(){
+			if(curImgIndex==0){//如果当前下标为0，将期望下标改为最后一张图片的下标imgLength-1
+				targetImgIndex=imgLength-1;
+				play();
+				return ;
+			}
+			targetImgIndex=curImgIndex-1//期望下标为当前下标的上一个
+			play()
+		}
+
+		function setBullet(){
+			$bullet.children().removeClass('active').eq(curImgIndex).addClass('active')
+		}
+
+		function autoPlay(){
+			clearInterval(timer);
+			timer=setInterval(playNext,3000);
+		}
+	</script>
+</body>
+</html>

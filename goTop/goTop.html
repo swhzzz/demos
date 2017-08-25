@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>回到顶部组件</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<style>
+		.wrap {
+			display: none;
+			position: fixed;
+			bottom: 10px;
+			right: 10px;
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			background-color: #ccc;
+			text-align: center;
+		}
+		.gotop {
+			text-decoration: none;
+			color: #fff;
+			line-height: 100px;
+		}
+		.gotop:hover {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<p>段落内容</p>
+	<script>
+		function goTop(ct,target){
+			this.ct=ct;
+			this.target=target;
+			this.createNode();
+			this.bindEvent();
+		}
+		goTop.prototype={
+			createNode: function(){
+				var htmls='<div class="'+this.ct+'"><a href="javascript:void(0)" class="'+this.target+'">回到顶部</a></div>';
+				$('body').append($(htmls) );
+			},
+			bindEvent: function(){
+				var _that=this;
+				$(window).on('scroll',function(){
+					if($(window).scrollTop()>100){
+						$($('.'+_that.ct)).show();
+					}else {
+						$($('.'+_that.ct)).hide();
+					}
+				})
+				
+				$('.'+_that.target).on('click',function(){
+					var timer=null;
+					var scrollTop=$(window).scrollTop();
+					timer=setInterval(function(){
+						if(scrollTop<=0) clearInterval(timer);
+							scrollTop-=20;
+						$(window).scrollTop(scrollTop);
+					},1)
+				})
+			}
+		}
+		var gototop=new goTop('wrap','gotop');
+	</script>
+</body>
+</html>

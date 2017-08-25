@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        @keyframes xx {
+            0% {
+                width: 0;
+            }
+            50% {
+                width: 0;
+            }
+            100% {
+                width: 378px;
+            }
+        }
+        
+        @keyframes yy {
+            from {
+                width: 0;
+            }
+        }
+        
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        
+        p:first-child {
+            width: 362px;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: yy 4s steps(60, start);
+        }
+        
+        p:nth-child(2) {
+            white-space: nowrap;
+            overflow: hidden;
+            animation: xx 8s steps(60, start);
+        }
+        
+        span {
+            animation: blink 1s infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Hello,i am shen wen hao,nice to meet you!</p>
+    <p>Hello,i am shen wen hao,nice to meet you!<span>|</span></p>
+</body>
+
+</html>

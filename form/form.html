@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .clearfix:after {
+      content: '';
+      display: block;
+      clear:both;
+    }
+    .wrap {
+      width: 600px;
+      margin: 20px auto 0 auto;
+      box-shadow: 0 5px 20px #ccc;
+    }
+    h2 {
+      background-color: #009688;
+      padding: 15px 16px;
+      color: white;
+    }
+    form {
+      padding: 24px 16px;
+    }
+    form label{
+      color: #757575;
+    }
+    div {
+      margin-bottom: 18px;
+    }
+    #name, 
+    #QQ,
+    #ltext {
+      width: 100%;
+      border: none;
+      padding-top: 10px;
+      border-bottom: 1px solid #757575;
+    }
+    .xinxi {
+      margin-bottom: 0;
+    }
+    .like,
+    .sex {
+      float: left;
+      width: 50%;
+    }
+    input[type="submit"] {
+      color: white;
+      border-style: none;
+      background-color: #009688;
+      width: 60px;
+      height: 34px;
+      margin-bottom: 9px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div>
+      <h2>信息收集表</h2>
+      <form action="#" method="post">
+        <div>
+          <label for="name">姓名</label><br>
+          <input type="text" id="name" name="name">
+        </div>
+        <div>
+          <label for="QQ">QQ</label><br>
+          <input type="text" id="QQ" name="name">
+        </div>
+        <div>
+          <label for="ltext">要说的话</label><br>
+          <textarea name="ltext" id="ltext" cols="30" rows="5"></textarea>
+        </div>
+        <div class="xinxi clearfix">
+          <div class="like ">
+            <input type="checkbox" name="Milk" id="Milk" checked>
+            <label for="Milk">Milk</label><br>
+            <input type="checkbox" id="Sugar" name="Sugar">
+            <label for="Sugar">Sugar</label><br>
+            <input type="checkbox" name="Lemon" id="Lemon">
+            <label for="Lemon">Lemon</label><br>
+          </div>
+          <div class="sex ">
+            <input type="radio" name="sex" id="Male" checked>
+            <label for="Male">Male</label><br>
+            <input type="radio" name="sex" id="Female">
+            <label for="Female">Female</label><br>
+          </div>
+        </div>
+        <input type="submit" value="提交">
+      </form>
+    </div>
+  </div>
+</body>
+</html>

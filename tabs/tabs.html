@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tab组件</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <style>
+        ul,
+        li {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        
+        .layout {
+            width: 500px;
+            margin: 0 auto;
+        }
+        
+        .tab {
+            width: 500px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #008000;
+        }
+        
+        .tab-header {
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .tab-header>li {
+            float: left;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            border: 1px solid #fff;
+            border-bottom: 0;
+            cursor: pointer;
+        }
+        
+        .tab-header>li.active {
+            border: 1px solid #ccc;
+            border-bottom: 1px solid #fff;
+            margin-bottom: -1px;
+        }
+        
+        .tab-container>li {
+            display: none;
+            padding: 10px 0 0 10px;
+        }
+        
+        .tab-container>li.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="tab layout">
+        <ul class="tab-header clearfix">
+            <li class="active">选项一</li>
+            <li>选项二</li>
+            <li>选项三</li>
+        </ul>
+        <ul class="tab-container">
+            <li class="active">内容一</li>
+            <li>内容二</li>
+            <li>内容三</li>
+        </ul>
+    </div>
+
+    <div class="tab layout">
+        <ul class="tab-header clearfix">
+            <li class="active">选项一</li>
+            <li>选项二</li>
+            <li>选项三</li>
+            <li>选项四</li>
+        </ul>
+        <ul class="tab-container">
+            <li class="active">内容一</li>
+            <li>内容二</li>
+            <li>内容三</li>
+            <li>内容四</li>
+        </ul>
+    </div>
+    <script>
+        var createTab = (function() {
+            function Tab(ct) {
+                this.$ct = ct;
+                this.init();
+                this.bind();
+            }
+            Tab.prototype.init = function() {
+                this.tabHeader = this.$ct.find('.tab-header');
+                this.$tabLis = this.$ct.find('.tab-header>li');
+                this.$tabPanels = this.$ct.find('.tab-container>li');
+            }
+            Tab.prototype.bind = function() {
+                var _that = this;
+                this.tabHeader.on('click', 'li', function(e) {
+                    var index = $(this).index();
+                    $(this).siblings().removeClass('active');
+                    $(this).addClass('active');
+                    _that.$tabPanels.removeClass('active');
+                    _that.$tabPanels.eq(index).addClass('active');
+                })
+            }
+            return {
+                start: function($ct) {
+                    $ct.each(function(index, node) {
+                        new Tab($(node))
+                    })
+                }
+            }
+        })()
+        createTab.start($('.tab'))
+    </script>
+</body>
+
+</html>

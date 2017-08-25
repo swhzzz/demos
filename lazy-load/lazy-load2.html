@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>懒加载</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .ct {
+            width: 650px;
+            margin: 0 auto;
+        }
+        
+        .ct>p {
+            word-wrap: break-word;
+        }
+        
+        img {
+            width: 300px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        #hello {
+            opacity: 0;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <div class="ct">
+        <img data-src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2448442202,260759004&fm=15&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3809619160,170129453&fm=26&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=350785431,533736265&fm=26&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3616134096,2957136747&fm=26&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1881432817,3028539114&fm=26&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1600229907,3717083131&fm=11&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2652248065,3836728914&fm=26&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3482097446,4230250894&fm=26&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=202475184,3131546551&fm=26&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1710461590,2969651489&fm=15&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2639496995,1085530167&fm=26&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3801247706,2708120878&fm=26&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3490995153,1611689730&fm=15&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1404616518,970475175&fm=26&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4232604547,2164402472&fm=15&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <img data-src='https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1688685838,1098719318&fm=26&gp=0.jpg' src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495197955482&di=f74e69de8faa288f68f160cb1dfd10bf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20091014%2F20091014191854-1887029992.jpg"
+            alt="">
+        <p id="hello">hello</p>
+    </div>
+    <script>
+        var createLazy = (function() {
+            function Exposure($target, callback) {
+                this.$target = $target;
+                this.callback = callback;
+                this.bind();
+                this.check();
+            }
+            Exposure.prototype.bind = function() {
+                var that = this;
+                $(window).on('scroll', function() {
+                    that.check();
+                });
+            }
+            Exposure.prototype.check = function() {
+                if (this.isVisible()) {
+                    this.callback(this.$target)
+                }
+            }
+            Exposure.prototype.isVisible = function() {
+                var windowHeight = $(window).height(),
+                    offsetTop = this.$target.offset().top,
+                    scrollTop = $(window).scrollTop(),
+                    nodeHeight = this.$target.height();
+                if (windowHeight + scrollTop > offsetTop) {
+                    return true;
+                }
+                return false;
+            }
+            return { //返回一个函数，可以调用
+                start: function($targets, callback) {
+                    $.each($targets, function(idx, node) {
+                        new Exposure($(node), callback);
+                    })
+                }
+            }
+        })()
+
+        createLazy.start($('.ct img'), function($img) {
+            showPic($img)
+        })
+
+        function showPic($img) {
+            var url = $img.data('src');
+            $img.attr('src', url)
+        }
+    </script>
+</body>
+
+</html>

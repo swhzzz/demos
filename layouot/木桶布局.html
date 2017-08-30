@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>木桶布局</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<style>
+		* {
+      margin: 0;
+      padding: 0;
+    }
+
+    .img-preview{
+      width: 1000px;
+      margin: 0 auto;
+    }
+    .img-row {
+      margin-bottom: 8px;
+    }
+    .img-row:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    .img-box {
+      float: left;
+    }
+    .img-line .img-box:first-child {
+      padding-left: 0;
+    }
+	</style>
+</head>
+<body>
+<div class="img-preview"></div>
+	<script>
+	var a=1;
+		function Barrels($ct){
+			this.$ct=$ct;
+			this.rowList=[],
+			this.baseHeight=200;
+			this.loadImg();
+		}		
+		Barrels.prototype={
+			loadImg: function(){
+				var _this=this;
+				var imgUrls=this.getImageUrls(100);
+				$.each(imgUrls,function(idx,url){
+					var img=new Image();
+					img.src=url;
+					img.onload=function(){
+						var ratio=img.width/img.height;
+						var imgInfo={
+							target: $(img),
+							width: _this.baseHeight*ratio,
+							height: _this.baseHeight,
+							ratio: ratio
+						};
+						_this.render(imgInfo);
+					};
+				});
+			},
+
+			render: function(imgInfo){
+				var _this=this;
+				var rowList=this.rowList,
+					rowWidth=0,
+					rowHeight=0,
+					clientWidth=this.$ct.width(),
+					lastImgInfo=imgInfo;
+				this.rowList.push(imgInfo);
+				$.each(rowList,function(idx,imgInfo){
+					rowWidth+=imgInfo.width;
+					if(rowWidth>clientWidth){
+						rowList.pop();
+						rowWidth=rowWidth-lastImgInfo.width;
+						rowHeight=clientWidth*_this.baseHeight/rowWidth;//aaaaaaaaaaa;
+
+						_this.createRow(rowHeight);
+						_this.rowList=[];
+						_this.rowList.push(lastImgInfo);
+					}
+				})	;
+			},
+
+			createRow: function(rowHeight){
+				var $rowCt=$('<div class="img-row"></div>');
+				$.each(this.rowList,function(idx,imgInfo){
+					var $imgCt=$('<div class="img-box"></div>'),
+						$img=imgInfo.target;
+						$img.height(rowHeight);
+						$imgCt.append($img);
+						$rowCt.append($imgCt);
+				});
+				this.$ct.append($rowCt);
+			},
+
+			getImageUrls: function(num){
+				var urls=[];
+				for(var i=0;i<num;i++){
+					urls[i]='https://unsplash.it/'+this.getRandomNum()+'/'+this.getRandomNum()+'/?random';
+				}
+				console.log(urls)
+				return urls;
+			},
+
+			getRandomNum: function(){
+				return parseInt(Math.random()*100+200);
+			}
+		};
+		var barrels = new Barrels($('.img-preview'));
+		
+	</script>
+</body>
+</html>

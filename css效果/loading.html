@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>loading</title>
+    <style>
+        body {
+            background-color: rgb(13, 206, 203);
+        }
+        
+        div {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+        
+        .a {
+            position: relative;
+            width: 20px;
+            height: 60px;
+            background-color: #000;
+            animation: 1.2s larger infinite;
+            animation-delay: .2s;
+        }
+        
+        .a:before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 0;
+            width: 20px;
+            height: 60px;
+            background-color: #000;
+            animation: 1.2s larger infinite;
+        }
+        
+        .a:after {
+            position: absolute;
+            left: 30px;
+            content: '';
+            width: 20px;
+            height: 60px;
+            background-color: #000;
+            animation: 1.2s larger infinite;
+            animation-delay: .4s;
+        }
+        
+        .b {
+            border: 20px solid rgb(61, 216, 213);
+            border-top: 20px solid #fff;
+            border-radius: 50%;
+            animation: 1s roll infinite linear;
+        }
+        
+        @keyframes larger {
+            0% {
+                height: 60px;
+                box-shadow: 0 0 0 #000
+            }
+            50% {
+                height: 80px;
+                box-shadow: 0 -20px 0 #000
+            }
+            100% {
+                height: 60px;
+                box-shadow: 0 0 0 #000
+            }
+        }
+        
+        @keyframes roll {
+            from {
+                transform: rotate(0deg)
+            }
+            to {
+                transform: rotate(360deg)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="a"></div>
+    <div class="b"></div>
+</body>
+
+</html>

@@ -116,16 +116,16 @@
                     city: city
                 }
             }).done(function(data) {
-                render(data.results[0]);
-                render2(data.results[0])
+                render(data.results[0], $('.weather-ct'), 1, 4)
+                render(data.results[0], $('.today-weather-ct'), 0, 1)
             })
         }
 
-        function render(data) {
+        function render(data, $ct, start, end) {
             let weatherData = data.weather_data
             console.log(data)
-            $('.weather-ct').empty()
-            for (let i = 1; i < weatherData.length; i++) {
+            $ct.empty()
+            for (let i = start; i < end; i++) {
                 let details = weatherData[i]
                 let str = `<ul class="weather"> 
                             <li>${details.date}</li>
@@ -134,23 +134,7 @@
                             <li>${details.temperature}</li>
                             <li>${details.wind}</li>
                             </ul>`
-                $('.weather-ct').append($(str))
-            }
-        }
-
-        function render2(data) {
-            let weatherData = data.weather_data
-            $('.today-weather-ct').empty()
-            for (let i = 0; i < 1; i++) {
-                let details = weatherData[i]
-                let str = `<ul class="weather"> 
-                            <li>${details.date}</li>
-                            <li><img src="${details.dayPictureUrl}"><img src="${details.nightPictureUrl}"></li>
-                            <li>${details.weather}</li>
-                            <li>${details.temperature}</li>
-                            <li>${details.wind}</li>
-                            </ul>`
-                $('.today-weather-ct').append($(str))
+                $ct.append($(str))
             }
         }
 
